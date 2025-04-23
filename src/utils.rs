@@ -77,7 +77,7 @@ const LEGEND_MAPPING: [[usize; NUM_LEGENDS]; 8] = [
     [4, 0, 1, 2, 10, 3, 5, 6, 7, 8, 9, 11], // 7 = center front & x & y
 ];
 
-pub(crate) fn realign_legends<T>(values: T, alignment: Alignment) -> [Option<Legend>; NUM_LEGENDS]
+pub(crate) fn realign_legends<T>(values: T, alignment: Alignment) -> Vec<Option<Legend>>
 where
     T: IntoIterator<Item = Option<Legend>>,
 {
@@ -88,8 +88,9 @@ where
     let mut sorted = mapping.iter().zip(values).collect::<Vec<_>>();
     sorted.sort_by_key(|el| el.0);
 
-    let mut values = sorted.into_iter().map(|el| el.1);
-    std::array::from_fn(|_| values.next().unwrap_or(None))
+    let values = sorted.into_iter().map(|el| el.1);
+    //std::array::from_fn(|_| values.next().unwrap_or(None))
+    values.collect()
 }
 
 #[cfg(test)]
@@ -155,7 +156,7 @@ mod tests {
         let expected = ["A", "I", "C", "G", "J", "H", "B", "K", "D", "F", "E", "L"];
 
         let result = realign_legends(legends.clone(), Alignment::new(4).unwrap());
-        let result_text = result.map(|l| l.unwrap().text);
+        let result_text: Vec<String> = result.into_iter().map(|l| l.unwrap().text).collect();
 
         assert_eq!(result_text, expected);
 
@@ -168,7 +169,7 @@ mod tests {
         let expected = ["A", "", "B", "", "", "", "C", "", "D", "", "", ""];
 
         let result = realign_legends(legends.clone(), Alignment::new(4).unwrap());
-        let result_text = result.map(|l| l.map(|l| l.text).unwrap_or_default());
+        let result_text: Vec<String> = result.into_iter().map(|l| l.map(|l| l.text).unwrap_or_default()).collect();
 
         assert_eq!(result_text, expected);
     }

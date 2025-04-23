@@ -201,7 +201,7 @@ where
             ry: self.ry,
             profile: self.p.clone(),
             ghosted: self.g,
-            switch: Switch {
+            key_switch: Switch {
                 mount: self.sm.clone(),
                 brand: self.sb.clone(),
                 typ: self.st.clone(),
@@ -595,9 +595,9 @@ mod tests {
         assert_is_close!(key.rx, 0.0);
         assert_is_close!(key.ry, 0.0);
         assert_eq!(key.profile, "");
-        assert_eq!(key.switch.mount, "");
-        assert_eq!(key.switch.brand, "");
-        assert_eq!(key.switch.typ, "");
+        assert_eq!(key.key_switch.mount, "");
+        assert_eq!(key.key_switch.brand, "");
+        assert_eq!(key.key_switch.typ, "");
         assert!(!key.ghosted);
         assert!(!key.stepped);
         assert!(!key.homing);

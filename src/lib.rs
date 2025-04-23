@@ -117,7 +117,7 @@ where
     /// Legends that are empty in KLE will be deserialised as [`None`].
     ///
     /// [alignment]: https://raw.githubusercontent.com/staticintlucas/kle-serial-rs/main/doc/alignment.png
-    pub legends: [Option<Legend>; NUM_LEGENDS],
+    pub legends: Vec<Option<Legend>>,
     /// The colour of the key
     pub color: Color,
     /// The X position of the key measured in keyboard units (typically 19.05 mm or 0.75 in).
@@ -207,7 +207,7 @@ where
     /// unrecognised values are rendered using the unnamed default profile.
     pub profile: String,
     /// The key switch.
-    pub switch: Switch,
+    pub key_switch: Switch,
     /// Whether the key is ghosted.
     pub ghosted: bool,
     /// Whether the key is stepped.
@@ -224,7 +224,7 @@ where
 {
     fn default() -> Self {
         Self {
-            legends: std::array::from_fn(|_| None),
+            legends: vec![None; NUM_LEGENDS],
             color: color::KEY,
             x: T::zero(),
             y: T::zero(),
@@ -238,7 +238,7 @@ where
             rx: T::zero(),
             ry: T::zero(),
             profile: String::new(),
-            switch: Switch::default(),
+            key_switch: Switch::default(),
             ghosted: false,
             stepped: false,
             homing: false,
@@ -402,9 +402,9 @@ mod tests {
         assert_is_close!(key.rx, 0.0);
         assert_is_close!(key.ry, 0.0);
         assert_eq!(key.profile, "");
-        assert_eq!(key.switch.mount, "");
-        assert_eq!(key.switch.brand, "");
-        assert_eq!(key.switch.typ, "");
+        assert_eq!(key.key_switch.mount, "");
+        assert_eq!(key.key_switch.brand, "");
+        assert_eq!(key.key_switch.typ, "");
         assert!(!key.ghosted);
         assert!(!key.stepped);
         assert!(!key.homing);
