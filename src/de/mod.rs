@@ -34,10 +34,10 @@ impl From<KleMetadata> for Metadata {
             radii: value.radii.unwrap_or(default.radii),
             name: value.name.unwrap_or(default.name),
             author: value.author.unwrap_or(default.author),
-            switch: Switch {
-                mount: value.switch_mount.unwrap_or(default.switch.mount),
-                brand: value.switch_brand.unwrap_or(default.switch.brand),
-                typ: value.switch_type.unwrap_or(default.switch.typ),
+            key_switch: Switch {
+                mount: value.switch_mount.unwrap_or(default.key_switch.mount),
+                brand: value.switch_brand.unwrap_or(default.key_switch.brand),
+                typ: value.switch_type.unwrap_or(default.key_switch.typ),
             },
             plate_mount: value.plate.unwrap_or(default.plate_mount),
             pcb_mount: value.pcb.unwrap_or(default.pcb_mount),
@@ -333,9 +333,9 @@ mod tests {
         assert_eq!(md.radii, Metadata::default().radii);
         assert_eq!(md.name, Metadata::default().name);
         assert_eq!(md.author, Metadata::default().author);
-        assert_eq!(md.switch.mount, Metadata::default().switch.mount);
-        assert_eq!(md.switch.brand, Metadata::default().switch.brand);
-        assert_eq!(md.switch.typ, Metadata::default().switch.typ);
+        assert_eq!(md.key_switch.mount, Metadata::default().key_switch.mount);
+        assert_eq!(md.key_switch.brand, Metadata::default().key_switch.brand);
+        assert_eq!(md.key_switch.typ, Metadata::default().key_switch.typ);
         assert_eq!(md.plate_mount, Metadata::default().plate_mount);
         assert_eq!(md.pcb_mount, Metadata::default().pcb_mount);
         assert_eq!(md.notes, Metadata::default().notes);
@@ -364,9 +364,9 @@ mod tests {
         assert_eq!(md.radii, "radii");
         assert_eq!(md.name, "name");
         assert_eq!(md.author, "author");
-        assert_eq!(md.switch.mount, "switch_mount");
-        assert_eq!(md.switch.brand, "switch_brand");
-        assert_eq!(md.switch.typ, "switch_type");
+        assert_eq!(md.key_switch.mount, "switch_mount");
+        assert_eq!(md.key_switch.brand, "switch_brand");
+        assert_eq!(md.key_switch.typ, "switch_type");
         assert!(md.plate_mount);
         assert!(md.pcb_mount);
         assert_eq!(md.notes, "notes");

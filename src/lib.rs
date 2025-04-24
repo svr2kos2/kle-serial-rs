@@ -281,7 +281,7 @@ pub struct Metadata {
     /// The author of the layout.
     pub author: String,
     /// The default switch type used in this layout. This can be set separately for individual keys.
-    pub switch: Switch,
+    pub key_switch: Switch,
     /// Whether the switch is plate mounted.
     pub plate_mount: bool,
     /// Whether the switch is PCB mounted.
@@ -299,7 +299,7 @@ impl Default for Metadata {
             radii: String::new(),
             name: String::new(),
             author: String::new(),
-            switch: Switch::default(),
+            key_switch: Switch::default(),
             plate_mount: false,
             pcb_mount: false,
             notes: String::new(),
@@ -421,9 +421,9 @@ mod tests {
         assert_eq!(meta.radii, "");
         assert_eq!(meta.name, "");
         assert_eq!(meta.author, "");
-        assert_eq!(meta.switch.mount, "");
-        assert_eq!(meta.switch.brand, "");
-        assert_eq!(meta.switch.typ, "");
+        assert_eq!(meta.key_switch.mount, "");
+        assert_eq!(meta.key_switch.brand, "");
+        assert_eq!(meta.key_switch.typ, "");
         assert!(!meta.plate_mount);
         assert!(!meta.pcb_mount);
         assert_eq!(meta.notes, "");
